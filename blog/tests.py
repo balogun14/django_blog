@@ -1,5 +1,3 @@
-from audioop import reverse
-# from urllib import response
 from django.urls import reverse
 from django.test import TestCase
 
