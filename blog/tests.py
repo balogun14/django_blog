@@ -1,3 +1,6 @@
+from audioop import reverse
+# from urllib import response
+from django.urls import reverse
 from django.test import TestCase
 
 from django.contrib.auth import get_user_model
@@ -35,3 +38,39 @@ class BlogTests(TestCase):
         self.assertEqual(self.post.author.username, "testuser")
         self.assertEqual(str(self.post), "A good title")
         self.assertEqual(self.post.get_absolute_url(), "/post/1")
+        
+    def test_url_exist_at_correct_location_listview(self):
+        """
+        docstring
+        """
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        
+    def test_url_exist_at_correct_location_detaailview(self):
+        """
+        docstring
+        """
+        response = self.client.get('/post/1')
+        self.assertEqual(response.status_code, 200)
+        
+    def test_post_listview(self):
+        """
+        docstring
+        """
+        response = self.client.get(reverse('home'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response,'nice content')
+        self.assertTemplateUsed(response, 'home.html')
+        
+    def test_post_detailview(self):
+        """
+        docstring
+        """
+        response = self.client.get(reverse('post_detail',kwargs={'pk':self.post.pk}))
+        no_response = self.client.get('/post/100000')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(no_response.status_code, 404)
+        self.assertContains(response, 'A good title')
+        self.assertTemplateUsed(response, 'post_detail.html')
+        
+        
