@@ -13,7 +13,11 @@ header {
     border-bottom: 1px solid #999;
     margin-bottom: 2rem;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
+
 
 header h1 a {
     color: red;

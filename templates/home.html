@@ -1,18 +1,29 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>Django Blog </title>
-    <link rel='stylesheet' href = "{% static 'css/base.css' %}">
+    <link rel='stylesheet' href="{% static 'css/base.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <header>
-        <h1>
+        <div class="nav-left">
+           <h1>
             <a href="{% url 'home' %}">Django Blog</a>
-        </h1>
+        </h1>   
+        </div>
+      <div class="nav-right">
+        <a href="{% url 'post_new'%}">New Blog Post</a>
+      </div>
+
     </header>
     <div>
         {% block content %}
@@ -25,4 +36,5 @@
         {% endblock content %}
     </div>
 </body>
+
 </html>
